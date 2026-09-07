@@ -12,6 +12,12 @@ export type holdingAsset = {
   holding_ratio: number;
 };
 
+export type portfolio = {
+  total_asset_amount: number;
+  total_gain_amount: number;
+  total_gain_ratio: number;
+};
+
 export type portfolioResponse = {
   hodlingAsset: holdingAsset[]; // array
   total_asset_amount: number;

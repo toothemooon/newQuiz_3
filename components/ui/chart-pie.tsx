@@ -20,8 +20,9 @@ import {
 } from "@/components/ui/chart";
 
 // better try to use api not direct use this.
-// import { holdingAsset } from "@/lib/type";
+import { holdingAsset, portfolio } from "@/lib/type";
 // import { mock_data } from "@/lib/mock-data";
+import { useState, useEffect } from "react";
 
 export const description = "A donut chart with text";
 
@@ -62,6 +63,16 @@ const chartConfig = {
 export function ChartPieDonutText() {
   const totalVisitors = React.useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
+  }, []);
+
+  const [portfolio, setPortfolio] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch("/api/portfolio");
+      const data = await response.json();
+      setPortfolio(data.portfolio);
+    }
+    fetchData();
   }, []);
 
   return (
