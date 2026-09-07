@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/chart";
 
 // better try to use api not direct use this.
-import { holdingAsset, portfolio } from "@/lib/type";
+import { Portfolio } from "@/lib/type";
 // import { mock_data } from "@/lib/mock-data";
 import { useState, useEffect } from "react";
 
@@ -65,12 +65,12 @@ export function ChartPieDonutText() {
     return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
   }, []);
 
-  const [portfolio, setPortfolio] = useState([]);
+  const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
   useEffect(() => {
     async function fetchData() {
       const response = await fetch("/api/portfolio");
       const data = await response.json();
-      setPortfolio(data.portfolio);
+      setPortfolio(data);
     }
     fetchData();
   }, []);
@@ -92,9 +92,9 @@ export function ChartPieDonutText() {
               content={<ChartTooltipContent hideLabel />}
             />
             <Pie
-              data={chartData}
-              dataKey="visitors"
-              nameKey="browser"
+              data={portfolio?.holding_assets} // 使用 portfolio 数据
+              dataKey="holding_ratio" // 数值字段
+              nameKey="asset.name" // 名称字段（嵌套）
               innerRadius={60}
               strokeWidth={5}
             >
