@@ -19,6 +19,10 @@ import {
   type ChartConfig,
 } from "@/components/ui/chart";
 
+// better try to use api not direct use this.
+// import { holdingAsset } from "@/lib/type";
+// import { mock_data } from "@/lib/mock-data";
+
 export const description = "A donut chart with text";
 
 const chartData = [
