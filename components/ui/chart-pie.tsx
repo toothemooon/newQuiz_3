@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { TrendingUp } from "lucide-react";
-import { Label, Pie, PieChart } from "recharts";
+import { Cell, Label, Pie, PieChart } from "recharts";
 
 import {
   Card,
@@ -38,23 +38,23 @@ const chartConfig = {
   holding_ratio: {
     label: "holding_ratio",
   },
-  "S&P 500 ETF (Vanguard)": {
+  VOO: {
     label: "VOO",
     color: "var(--chart-1)",
   },
-  "Apple Inc.": {
+  AAPL: {
     label: "AAPL",
     color: "var(--chart-2)",
   },
-  "Alphabet Inc.": {
+  GOOGL: {
     label: "GOOGL",
     color: "var(--chart-3)",
   },
-  "Microsoft Corp.": {
+  MSFT: {
     label: "MSFT",
     color: "var(--chart-4)",
   },
-  "Bitcoin ETF": {
+  BTC: {
     label: "BTC",
     color: "var(--chart-5)",
   },
@@ -99,6 +99,12 @@ export function ChartPieDonutText() {
               innerRadius={60}
               strokeWidth={5}
             >
+              {portfolio?.holding_assets.map((item) => (
+                <Cell
+                  key={item.asset.ticker_symbol}
+                  fill={`var(--color-${item.asset.ticker_symbol})`}
+                />
+              ))}
               <Label
                 content={({ viewBox }) => {
                   if (viewBox && "cx" in viewBox && "cy" in viewBox) {
