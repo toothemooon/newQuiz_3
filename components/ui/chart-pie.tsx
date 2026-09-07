@@ -114,14 +114,15 @@ export function ChartPieDonutText() {
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {totalVisitors.toLocaleString()}
+                          {portfolio?.total_asset_amount}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          {portfolio?.total_gain_amount}
+                          {portfolio?.total_gain_ratio}
                         </tspan>
                       </text>
                     );
