@@ -70,7 +70,8 @@ export function ChartPieDonutText() {
     async function fetchData() {
       const response = await fetch("/api/portfolio");
       const data = await response.json();
-      setPortfolio(data);
+      // save the returned mock data into use state
+      setPortfolio(data.mock_data);
     }
     fetchData();
   }, []);
