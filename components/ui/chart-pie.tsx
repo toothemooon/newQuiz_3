@@ -35,27 +35,27 @@ const chartData = [
 ];
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
+  holding_ratio: {
+    label: "holding_ratio",
   },
-  chrome: {
-    label: "Chrome",
+  "S&P 500 ETF (Vanguard)": {
+    label: "VOO",
     color: "var(--chart-1)",
   },
-  safari: {
-    label: "Safari",
+  "Apple Inc.": {
+    label: "AAPL",
     color: "var(--chart-2)",
   },
-  firefox: {
-    label: "Firefox",
+  "Alphabet Inc.": {
+    label: "GOOGL",
     color: "var(--chart-3)",
   },
-  edge: {
-    label: "Edge",
+  "Microsoft Corp.": {
+    label: "MSFT",
     color: "var(--chart-4)",
   },
-  other: {
-    label: "Other",
+  "Bitcoin ETF": {
+    label: "BTC",
     color: "var(--chart-5)",
   },
 } satisfies ChartConfig;
@@ -102,6 +102,13 @@ export function ChartPieDonutText() {
               <Label
                 content={({ viewBox }) => {
                   if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                    const gain = portfolio?.total_gain_amount ?? 0;
+                    const gainColor =
+                      gain > 0
+                        ? "text-green-500"
+                        : gain < 0
+                          ? "text-red-500"
+                          : "text-gray-500";
                     return (
                       <text
                         x={viewBox.cx}
