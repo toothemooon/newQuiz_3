@@ -1,7 +1,7 @@
 "use client";
 
 import { ChartPieDonutText } from "@/components/ui/chart-pie";
-import { Card } from "@/components/ui/card";
+import { Card, CardAction, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { Portfolio } from "@/lib/type";
 
@@ -18,8 +18,18 @@ export default function Page() {
   }, []);
   const cardData = portfolio?.holding_assets.map((item: any) => (
     <Card key={item.asset.ticker_symbol}>
-      {item.asset.ticker_symbol}
-      {item.asset.name}
+      <CardContent>
+        <div className="text-sm text-muted-foreground">
+          {item.asset.ticker_symbol}
+        </div>
+        <div>{item.asset.name}</div>
+        <CardAction>
+          <div className="text-right">
+            <div>{item.gain_amount}</div>
+            <div>{item.gain_ratio}%</div>
+          </div>
+        </CardAction>
+      </CardContent>
     </Card>
   ));
   return (
