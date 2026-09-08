@@ -130,10 +130,10 @@ export function ChartPieDonutText() {
                     const gain = portfolio?.total_gain_amount ?? 0;
                     const gainColor =
                       gain > 0
-                        ? "text-green-500"
+                        ? "fill-green-700"
                         : gain < 0
-                          ? "text-red-500"
-                          : "text-gray-500";
+                          ? "fill-red-700"
+                          : "fill-muted-foreground";
                     return (
                       <text
                         x={viewBox.cx}
@@ -144,7 +144,7 @@ export function ChartPieDonutText() {
                         <tspan
                           x={viewBox.cx}
                           y={viewBox.cy}
-                          className="fill-foreground text-3xl font-bold"
+                          className="fill-foreground text-2xl font-bold"
                         >
                           {portfolio
                             ? `¥${portfolio.total_asset_amount.toLocaleString("en-US")}`
@@ -153,7 +153,7 @@ export function ChartPieDonutText() {
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
-                          className="fill-muted-foreground"
+                          className={gainColor}
                         >
                           {gainText}
                         </tspan>
