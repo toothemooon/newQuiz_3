@@ -19,16 +19,20 @@ export default function Page() {
   const cardData = portfolio?.holding_assets.map((item: any) => (
     <Card key={item.asset.ticker_symbol}>
       <CardContent>
-        <div className="text-sm text-muted-foreground">
-          {item.asset.ticker_symbol}
-        </div>
-        <div>{item.asset.name}</div>
-        <CardAction>
-          <div className="text-right">
-            <div>{item.gain_amount}</div>
-            <div>{item.gain_ratio}%</div>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="text-sm text-muted-foreground">
+              {item.asset.ticker_symbol}
+            </div>
+            <div>{item.asset.name}</div>
           </div>
-        </CardAction>
+          <CardAction>
+            <div className="text-right">
+              <div>{item.gain_amount}</div>
+              <div>{item.gain_ratio}%</div>
+            </div>
+          </CardAction>
+        </div>
       </CardContent>
     </Card>
   ));
