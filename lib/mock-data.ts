@@ -58,7 +58,7 @@ export const mock_data = {
         name: "Bitcoin ETF",
         ticker_symbol: "BTC",
         logo_url:
-          "https://storage.googleapis.com/brooklyn-asset-logo/alpaca/BTC.svg",
+          "https://raw.githubusercontent.com/spothq/cryptocurrency-icons/master/128/color/btc.png",
       },
       asset_amount: 18534,
       gain_amount: -1850,
