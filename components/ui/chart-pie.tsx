@@ -66,6 +66,18 @@ export function ChartPieDonutText() {
   }, []);
 
   const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
+  // convert number to specified string
+  const formatSignedNumber = (value: number, prefix = "") => {
+    const sign = value > 0 ? "+" : value < 0 ? "-" : "";
+
+    return `${sign}${prefix}${Math.abs(value).toLocaleString()}`;
+  };
+  const gainText = portfolio
+    ? `${formatSignedNumber(portfolio.total_gain_amount, "¥")} (${formatSignedNumber(
+        portfolio.total_gain_ratio
+      )}%)`
+    : "Loading...";
+  // fetch mock data
   useEffect(() => {
     async function fetchData() {
       const response = await fetch("/api/portfolio");
@@ -78,10 +90,6 @@ export function ChartPieDonutText() {
 
   return (
     <Card className="flex flex-col">
-      <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Donut with Text</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
-      </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
@@ -127,15 +135,16 @@ export function ChartPieDonutText() {
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {portfolio?.total_asset_amount}
+                          {portfolio
+                            ? `¥${portfolio.total_asset_amount.toLocaleString("en-US")}`
+                            : "Loading..."}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          {portfolio?.total_gain_amount}
-                          {portfolio?.total_gain_ratio}
+                          {gainText}
                         </tspan>
                       </text>
                     );
@@ -147,11 +156,8 @@ export function ChartPieDonutText() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 leading-none font-medium">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+          Showing total assets for the last 6 months
         </div>
       </CardFooter>
     </Card>
