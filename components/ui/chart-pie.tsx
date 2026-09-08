@@ -60,6 +60,14 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
+const assetColors: Record<string, string> = {
+  VOO: "#0072B2",
+  AAPL: "#E69F00",
+  GOOGL: "#009E73",
+  MSFT: "#CC79A7",
+  BTC: "#D55E00",
+};
+
 export function ChartPieDonutText() {
   const totalVisitors = React.useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
@@ -110,7 +118,10 @@ export function ChartPieDonutText() {
               {portfolio?.holding_assets.map((item) => (
                 <Cell
                   key={item.asset.ticker_symbol}
-                  fill={`var(--color-${item.asset.ticker_symbol})`}
+                  fill={
+                    assetColors[item.asset.ticker_symbol] ??
+                    "var(--muted-foreground)"
+                  }
                 />
               ))}
               <Label
